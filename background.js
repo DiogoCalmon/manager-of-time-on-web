@@ -8,6 +8,7 @@ let hours;
 let minutes;
 let seconds;
 
+// when this function is called, she return the object of currentWebsite (i explain with more detail on read.md) with details
 function getCurrentTab() {
   return new Promise((resolve, reject) => {
       let queryOptions = {active: true, lastFocusedWindow: true};
@@ -21,6 +22,7 @@ function getCurrentTab() {
   });
 }
 
+// the name is self explanatory, the function catch the domain name
 function extractDomain(url) {
   try {
     let parseUrl = new URL(url);
@@ -34,6 +36,7 @@ function extractDomain(url) {
   }
 }
 
+// this function storage on chrome.storage the total time wasted on web
 function homeTimer() {
   console.log(principalTimer);
   chrome.storage.local.set({ "homeTimer": principalTimer }, () => {
@@ -43,6 +46,7 @@ function homeTimer() {
   });
 }
 
+// this function save the time of especifics divs
 function saveTimersToStorage() {
   chrome.storage.local.set({ "timersOfSites": timersOfSites }, () => {
     if (chrome.runtime.lastError) {
@@ -51,6 +55,7 @@ function saveTimersToStorage() {
   });
 }
 
+// this function catch the times of divs
 function loadTimersFromStorage() {
   return new Promise((resolve) => {
     chrome.storage.local.get("timersOfSites", (result) => {
@@ -62,6 +67,7 @@ function loadTimersFromStorage() {
   });
 }
 
+// here is the most important function, it's here where the current timer is implemented
 function startTimer(site) {
  
   if (!timersOfSites[site]) {
@@ -92,10 +98,10 @@ function startTimer(site) {
   }, 1000);
 }
 
+// this function has a objective of organize what to do when the domain changes
 function timerLogic() {
   return new Promise((resolve, reject) => {
     try {
-
       loadTimersFromStorage().then(() => {
         chrome.storage.local.get("currentDomain", (result) => {
           domain = result.currentDomain;
@@ -118,12 +124,12 @@ function timerLogic() {
   });
 }
 
+//listen when changing tabs
 chrome.tabs.onActivated.addListener(activeInfo => {
   getCurrentTab().then(tab => {
     let url = tab.url;
     let domain = extractDomain(url);
 
-    // Definir currentDomain
     return new Promise((resolve, reject) => {
       if (!sites.includes(domain)) {
         chrome.storage.local.set({ "currentDomain": "others" }, resolve);
@@ -132,12 +138,10 @@ chrome.tabs.onActivated.addListener(activeInfo => {
       }
     });
   }).then(() => {
-    // Recuperar visitedSites
     return new Promise((resolve, reject) => {
       chrome.storage.local.get("visitedSites", (result) => {
         let visitedSites = result.visitedSites || [];
         
-        // Recuperar currentDomain
         chrome.storage.local.get("currentDomain", (result) => {
           let currentSite = result.currentDomain;
 
@@ -145,24 +149,22 @@ chrome.tabs.onActivated.addListener(activeInfo => {
             if (sites.includes(currentSite) || currentSite === "others") {
               visitedSites.push(currentSite);
 
-              // Salvar visitedSites
               chrome.storage.local.set({ "visitedSites": visitedSites }, () => {
                 if (chrome.runtime.lastError) {
                   console.error("Erro ao salvar visitedSites:", chrome.runtime.lastError);
                 }
-                resolve(); // Resolver após salvar
+                resolve();
               });
             } else {
-              resolve(); // Resolver se currentSite não foi adicionado
+              resolve();
             }
           } else {
-            resolve(); // Resolver se currentSite já está na lista
+            resolve();
           }
         });
       });
     });
   }).then(() => {
-    // Chamar timerLogic após a conclusão de todas as operações
     return timerLogic();
   }).then(() => {
     console.log("Lógica do timer concluída com sucesso.");
@@ -171,15 +173,13 @@ chrome.tabs.onActivated.addListener(activeInfo => {
   });
 });
 
-
-
+// Listen when the tab update ( but don't chase tha tab )
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.active) { 
     getCurrentTab().then(tab => {
       let url = tab.url;
       let domain = extractDomain(url);
   
-      // Definir currentDomain
       return new Promise((resolve, reject) => {
         if (!sites.includes(domain)) {
           chrome.storage.local.set({ "currentDomain": "others" }, resolve);
@@ -188,12 +188,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         }
       });
     }).then(() => {
-      // Recuperar visitedSites
       return new Promise((resolve, reject) => {
         chrome.storage.local.get("visitedSites", (result) => {
           let visitedSites = result.visitedSites || [];
           
-          // Recuperar currentDomain
           chrome.storage.local.get("currentDomain", (result) => {
             let currentSite = result.currentDomain;
   
@@ -201,24 +199,22 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
               if (sites.includes(currentSite) || currentSite === "others") {
                 visitedSites.push(currentSite);
   
-                // Salvar visitedSites
                 chrome.storage.local.set({ "visitedSites": visitedSites }, () => {
                   if (chrome.runtime.lastError) {
                     console.error("Erro ao salvar visitedSites:", chrome.runtime.lastError);
                   }
-                  resolve(); // Resolver após salvar
+                  resolve();
                 });
               } else {
-                resolve(); // Resolver se currentSite não foi adicionado
+                resolve();
               }
             } else {
-              resolve(); // Resolver se currentSite já está na lista
+              resolve();
             }
           });
         });
       });
     }).then(() => {
-      // Chamar timerLogic após a conclusão de todas as operações
       return timerLogic();
     }).then(() => {
       console.log("Lógica do timer concluída com sucesso.");
@@ -228,6 +224,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 
+// sends a confirmation signal to the popup saying that all data has been stored
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "check") {
     let response = { verify: true };
@@ -236,6 +233,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+// listen when the extension is updated
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.clear()
 });

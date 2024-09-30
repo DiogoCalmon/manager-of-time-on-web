@@ -66,7 +66,6 @@ function loadSavedDivs() {
       if (Array.isArray(result.savedDivs)) {
         result.savedDivs.forEach(function (divData) {
 
-        // Recriar as divs com os dados salvos
         const newBigDiv = document.createElement('div');
         newBigDiv.classList.add("info");
         newBigDiv.id = divData.site;
@@ -107,17 +106,19 @@ function loadSavedDivs() {
   });
 }
 
+// function for format the timer on top
 function loadHomeTimer() {
   setInterval(() => {
   chrome.storage.local.get("homeTimer", (result) => {
     if (result.homeTimer) {
       const timerElement = document.getElementById("homeTimer");
-        timerElement.textContent = formatTime(Math.trunc(result.homeTimer / 3600)) + ":" + formatTime(Math.trunc(result.homeTimer / 60) );
+        timerElement.textContent = formatTime(Math.trunc(result.homeTimer / 3600)) + ":" + formatTime(Math.trunc(result.homeTimer / 60) % 60);
       }
     });
   }, 200);
 }
 
+// function for update the value on html in real time
 function startLiveTimerUpdate() {
   setInterval(() => {
     chrome.storage.local.get("savedDivs", (result) => {
@@ -133,6 +134,7 @@ function startLiveTimerUpdate() {
   }, 1000);
 }
 
+// function that give a icon for html
 function chooseIcon(site) {
   switch (site) {
     case "youtube":
@@ -150,11 +152,12 @@ function chooseIcon(site) {
   }
 }
 
+// just for format values in a clock format
 function formatTime(unit) {
   return unit < 10 ? "0" + unit : unit;
 }
 
-
+// send a message to check if can access the storage
 chrome.runtime.sendMessage({ message: "check" }, async (response) => {
   if (response.verify) {
     chrome.storage.local.get("currentDomain", async (result) => {
