@@ -2,20 +2,7 @@
 {
     margin: 2px;
     padding: 2px;
-}
-
-.arya-regular {
-    font-family: "Arya", system-ui;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .arya-bold {
-    font-family: "Arya", system-ui;
-    font-weight: 700;
-    font-style: normal;
-  }
-  
+}  
 
 body
 {
@@ -95,7 +82,7 @@ main
     flex-grow: 0;
 }
 
-i.fa-instagram, i.fa-youtube, i.fa-reddit, i.fa-discord, i.fa-whatsapp, i.fa-globe {
+i.fa-instagram, i.fa-youtube, i.fa-reddit, i.fa-discord, i.fa-whatsapp, i.fa-globe, i.fa-facebook {
     font-size: 24px; /* Tamanho fixo para os ícones */
 }
 
@@ -125,6 +112,12 @@ i.fa-discord
 i.fa-whatsapp
 {
     color: #25D366;  
+    
+}
+
+i.fa-facebook
+{
+    color: #1877F2;  
     
 }
 

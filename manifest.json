@@ -2,6 +2,7 @@
     "manifest_version": 3,
     "name": "Internet Time Manager",
     "desciption": "extension with a objective of show the time spented on internet",
+    "license": "MIT",
     "version": "1.0.0",
     "permissions": [
         "tabs",

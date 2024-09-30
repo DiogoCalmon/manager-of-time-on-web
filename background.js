@@ -1,4 +1,4 @@
-const sites = ["youtube", "reddit", "instagram", "discord", "whatsapp"];
+const sites = ["youtube", "reddit", "instagram", "discord", "whatsapp", "facebook"];
 let timersOfSites = {};
 let principalTimer = 0;
 let final = false;

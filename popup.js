@@ -58,6 +58,7 @@ function createAndSaveDiv(site) {
   });
 }
 
+// 
 function loadSavedDivs() {
 
   chrome.storage.local.get("savedDivs", function (result) {
@@ -147,6 +148,8 @@ function chooseIcon(site) {
       return "fab fa-discord";
     case "whatsapp":
       return "fab fa-whatsapp";
+    case "facebook":
+      return "fab fa-facebook";
     default:
       return "fa-solid fa-globe";
   }
