@@ -1,0 +1,145 @@
+*
+{
+    margin: 2px;
+    padding: 2px;
+}
+
+.arya-regular {
+    font-family: "Arya", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .arya-bold {
+    font-family: "Arya", system-ui;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+
+body
+{
+    background-color: rgb(24 24 27);
+    min-width: 200px;
+    max-width: none;
+    width: 300px;
+}
+
+main
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(244 244 245);
+}
+
+.profile
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#picture
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#crystal
+{
+    width: 120px;
+    border-radius: 50%;
+}
+
+#hours
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.activitys
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.other-sites
+{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.app
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.info 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-grow: 0;
+}
+
+i.fa-instagram, i.fa-youtube, i.fa-reddit, i.fa-discord, i.fa-whatsapp, i.fa-globe {
+    font-size: 24px; /* Tamanho fixo para os ícones */
+}
+
+i.fa-instagram 
+{
+    color: #E4405F; /* Cor do Instagram */
+}
+
+i.fa-youtube
+{
+    color: #FF0000;
+    
+}
+
+i.fa-reddit
+{
+    color: #FF5700;  
+    
+}
+
+i.fa-discord
+{
+    color: #7289DA; 
+    
+}
+
+i.fa-whatsapp
+{
+    color: #25D366;  
+    
+}
+
+i.fa-globe
+{
+    color: #808080; 
+    
+}
+
+.timer
+{
+    font-size: 16px;
+}
+
+.line {
+    border-bottom: 2px solid #4b4b4b;
+    width: 100%;
+}

@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "corki",
+    "desciption": "internet time manager",
+    "version": "1.0.0",
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "background": {
+    "service_worker": "background.js",
+    "persistent": true
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
