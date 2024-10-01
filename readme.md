@@ -1,6 +1,6 @@
 # manager-of-time-on-web
 A Google extension that aims to show the user the time spent on the Internet and how much of that time is spent on some of the most popular websites.
-![Gif of extension](assets/gif%20for%20github.mp4)
+![Gif of extension](assets/gif%20ready.mov)
 
 # How works
 This project is made in vanilla JS and uses the ```chrome.storage``` and ``chrome.tabs`` API to be able to manage tabs and know which URL you are on at the moment. In addition, it takes advantage of ``chrome.storage`` to store relevant information to make this "data passage" between ``background.js`` and ``popup.js``, allowing you to take the domain of the current site and add it to an intuitive and simple graphical interface.
