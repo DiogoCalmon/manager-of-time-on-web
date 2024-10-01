@@ -1,4 +1,5 @@
-# manager-of-time-on-web
+# Internet-time-manager
+#### Video Demo: https://www.youtube.com/watch?v=GLV3ohakXWk
 A Google extension that aims to show the user the time spent on the Internet and how much of that time is spent on some of the most popular websites.
 ![Gif of extension](assets/Againafter-ezgif.com-resize.gif)
 
