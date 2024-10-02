@@ -16,7 +16,7 @@ The websites includeds is:
 any other site will be treated as "others"
 
 The timer logic is done in JavaScript where I create 3 object properties: hours, minutes and seconds, they are responsible for calculating the time of the timers and every time I enter a new tab I save these values ​​in an array of objects to send the data to the ```popup.js``` file, where I apply the second logic.
-In the second logic I make a loop that goes through all the elements of the array (the objects) that I had created in the previous logic and for each element of this array I create a div in the HTML of my extension using DOM
+In the second logic I make a loop that goes through all the elements of the array (the objects) that I had created in the previous logic and for each element of this array I create a div in the HTML of my extension using DOM.
 
 # How restart the timer
 Just restart the extension :) ( but probably i will made a update for fix this )
